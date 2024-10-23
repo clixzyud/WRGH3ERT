@@ -12,6 +12,11 @@
 #pragma comment(lib, "d3d9.lib")
 #pragma comment(lib, "dwmapi.lib")
 
+
+
+bool debug = true; // Set to false to disable debug output
+
+
 using namespace std;
 
 
@@ -442,6 +447,10 @@ void Menu() {
                 tab = 1;
                 ImGui::EndTabItem();
             }
+            if (ImGui::BeginTabItem("Exploits (testing)")) {
+                tab = 2;
+                ImGui::EndTabItem();
+            }
             ImGui::EndTabBar();
         }
 
@@ -464,7 +473,6 @@ void Menu() {
             ImGui::Checkbox("Weapon", &Features::rWeapon);
             ImGui::Checkbox("Skeleton", &Features::rSkeleton);
             ImGui::Checkbox("rgbSkeleton", &Features::rgbskeleton);
-            ImGui::Checkbox("idk the skidder has put something here for test", &Features::test);
 
 
             ImGui::SameLine();
@@ -480,7 +488,10 @@ void Menu() {
             ImGui::Checkbox("Snapline", &Features::rSnapline);
             ImGui::Checkbox("head", &Features::rHeadEsp);
         }
+        if (tab == 2) {
+            ImGui::Checkbox("rapidfire testing", &exploits::rapidfire);
 
+        }
         ImGui::Spacing();
         ImGui::Separator();
         ImGui::Spacing();
@@ -888,11 +899,15 @@ void ActorLoop() {
             ImGui::GetOverlayDrawList()->AddLine(ImVec2(screenWidth / 2, screenHeight - 5), ImVec2(Bottom2D.x, Bottom2D.y), ImColor(255,255,255), 1);
         }
 
+
+
+
         auto dist = GetCrossDistance(Head2D.x, Head2D.y, screenWidth / 2, screenHeight / 2);
         if (dist < Features::rFovSize && dist < Cached::ClosestDistance) {
             Cached::ClosestDistance = dist;
             Cached::TargetEntity = Player;
         }
+
     }
 }
 
@@ -1001,13 +1016,26 @@ WPARAM MainLoop() {
 
     return Message.wParam;
 }
+void cr3_loop()
+{
+    for (;;)
+    {
+        mem::fetch_cr3();
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+    }
+}
+
+
+
+
+
 
 int main() {
-    if (!mem::find_driver()) cout << "ERROR: Driver not found (cheat cannot perform without)" << endl;
+  /* if (!mem::find_driver()) cout << "ERROR: Driver not found (cheat cannot perform without)" << endl;
     mem::process_id = mem::find_process("FortniteClient-Win64-Shipping.exe");
-
+    
      virtualaddy = mem::find_image();
-    cr3 = mem::fetch_cr3();
+     std::thread([&]() { for (;;) { cr3_loop(); } }).detach();
    for (auto i = 0; i < INT_MAX; i++) {
             va_text = virtualaddy + i * 0x1000;
             auto uworld = read<uintptr_t>(va_text + Offsets::UWorld);
@@ -1016,9 +1044,15 @@ int main() {
                 break;
             }
         }
-    cout << "Base Address -> " << virtualaddy << endl;
-    cout << "CR3 -> " << cr3 << endl;
-    cout << "VAText -> " << va_text << endl;
+
+
+        */
+
+    if (debug) {
+        cout << "Base Address -> " << virtualaddy << endl;
+        cout << "CR3 -> " << cr3 << endl;
+        cout << "VAText -> " << va_text << endl;
+    }
 
     CreateOverlay();
     DirectXInit();

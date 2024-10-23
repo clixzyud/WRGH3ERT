@@ -702,8 +702,8 @@ NTSTATUS initialize_driver(_In_ PDRIVER_OBJECT drv_obj, _In_ PUNICODE_STRING pat
     PDEVICE_OBJECT device_obj = NULL;
 
     UNICODE_STRING name, link;
-    RtlInitUnicodeString(&name, L"\\Device\\redshirtfanisbased");
-    RtlInitUnicodeString(&link, L"\\DosDevices\\redshirtfanisbased");
+    RtlInitUnicodeString(&name, L"\\Device\\{A43E539-9D25-F310-C8A2-84ED5C1A9B2E}");
+    RtlInitUnicodeString(&link, L"\\DosDevices\\{A43E539-9D25-F310-C8A2-84ED5C1A9B2E}");
 
     status = IoCreateDevice(drv_obj, 0, &name, FILE_DEVICE_UNKNOWN, FILE_DEVICE_SECURE_OPEN, FALSE, &device_obj);
     if (!NT_SUCCESS(status)) {

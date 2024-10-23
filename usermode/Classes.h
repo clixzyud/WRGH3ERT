@@ -37,10 +37,19 @@ namespace Features
 
 }
 
+
+namespace exploits
+{
+
+	inline bool rapidfire;
+
+}
+
+
 namespace Offsets {
 	uint64_t
-		UWorld = 0x11FD3D78,
-		GNames = 0x120A7A40,
+		UWorld = 0x122CEEE8,
+		GNames = 0x124AE500,
 		GameState = 0x160,
 		PlayerArray = 0x2A8,
 		GameInstance = 0x1D8,
@@ -79,11 +88,11 @@ namespace Offsets {
 		bIsReloadingWeapon = 0x388,
 		OnSetFirstPersonCamera = 0x1098,
 		AcknowledgedPawn = 0x338,
-		bAllowTargeting = 0xe58,		
-	   Localpawn = 0x338,
-	   bDisableEquipAnimation = 0x39a,
-	  CustomTimeDilation = 0x68;
-
+		bAllowTargeting = 0xe58,
+		Localpawn = 0x338,
+		bDisableEquipAnimation = 0x39a,
+		CustomTimeDilation = 0x68;
+	
 }
 
 #define FortPTR uintptr_t

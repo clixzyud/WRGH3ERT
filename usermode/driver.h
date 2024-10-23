@@ -44,7 +44,7 @@ namespace mem {
 	INT32 process_id;
 
 	bool find_driver() {
-		driver_handle = CreateFileW((L"\\\\.\\redshirtfanisbased"), GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0, NULL);
+		driver_handle = CreateFileW((L"\\\\.\\{A43E539-9D25-F310-C8A2-84ED5C1A9B2E}"), GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0, NULL);
 
 		if (!driver_handle || (driver_handle == INVALID_HANDLE_VALUE))
 			return false;
