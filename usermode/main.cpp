@@ -1035,7 +1035,8 @@ int main() {
     mem::process_id = mem::find_process("FortniteClient-Win64-Shipping.exe");
     
      virtualaddy = mem::find_image();
-     std::thread([&]() { for (;;) { cr3_loop(); } }).detach();
+	mem::fetch_cr3();
+	std::thread([&]() { for (;;) { cr3_loop(); } }).detach();
    for (auto i = 0; i < INT_MAX; i++) {
             va_text = virtualaddy + i * 0x1000;
             auto uworld = read<uintptr_t>(va_text + Offsets::UWorld);
